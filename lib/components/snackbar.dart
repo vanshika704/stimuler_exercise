@@ -1,20 +1,22 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SnackbarController extends GetxController {
-  void showModal(String message) {
+  // Method to show modal with a list of styled buttons
+  void showModal(String message, List<Map<String, String>> nodes) {
     Get.bottomSheet(
       GestureDetector(
         onVerticalDragUpdate: (details) {
           if (details.primaryDelta! > 5) {
-            Get.back(); // Close the bottom sheet when user scrolls down
+            Get.back(); // Close the bottom sheet when the user scrolls down
           }
         },
         child: Container(
-          width: double.infinity, // Set width to full
+          width: double.infinity, // Full screen width
           padding: const EdgeInsets.all(16),
           decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 41, 31, 62),
+            color: Color.fromARGB(255, 32, 24, 50),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
               topRight: Radius.circular(30),
@@ -24,31 +26,102 @@ class SnackbarController extends GetxController {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min, // Only take necessary height
             children: [
-              const Text(
-                'Choose Exercise',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+              Center(
+                child: Text(
+                  'Choose Exercise',
+                  style: GoogleFonts.quicksand(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              const SizedBox(height: 10),
-              SingleChildScrollView(
-                child: Text(
-                  message,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: nodes.length,
+                  itemBuilder: (context, index) {
+                    final node = nodes[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed(node['route']!); // Navigate to respective route
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _getButtonColor(node),
+                          side: BorderSide(color: _getBorderColor(node)),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          elevation: node['state'] == 'selected' ? 10 : 0, // Elevation for selected state
+                          shadowColor: node['state'] == 'selected'
+                              ? Colors.purpleAccent
+                              : Colors.transparent, // Glowing effect for selected state
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                    node['icon'] ?? '',
+                                  ),
+                                  radius: 18, // Profile picture or icon
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  node['label']!,
+                                  style: GoogleFonts.quicksand(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              node['progress'] ?? '',
+                              style: GoogleFonts.quicksand(
+                                fontSize: 14,
+                                color: Colors.white70,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
           ),
         ),
       ),
-      isDismissible: true, // Allow tapping outside to close
-      enableDrag: true, // Enable drag-to-dismiss
-      backgroundColor: Colors.transparent, // Make background transparent
+      isDismissible: true,
+      enableDrag: true,
+      backgroundColor: Colors.transparent,
     );
+  }
+
+  // Get button color based on state
+  Color _getButtonColor(Map<String, String> node) {
+    if (node['state'] == 'completed') {
+      return Colors.green;
+    } else if (node['state'] == 'selected') {
+      return Colors.purple;
+    }
+    return const Color.fromARGB(255, 48, 37, 71); // Default button color
+  }
+
+  // Get border color based on state
+  Color _getBorderColor(Map<String, String> node) {
+    if (node['state'] == 'completed') {
+      return Colors.green;
+    } else if (node['state'] == 'selected' || node['state'] == 'active') {
+      return Colors.purple;
+    }
+    return Colors.transparent;
   }
 }

@@ -1,5 +1,19 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: FlowPathScreen(),
+    );
+  }
+}
+
 class FlowPathScreen extends StatefulWidget {
   @override
   _FlowPathScreenState createState() => _FlowPathScreenState();
@@ -11,24 +25,20 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 13, 14, 30),
-      appBar: AppBar( backgroundColor: const Color.fromARGB(255, 13, 14, 30),
-        title:  const Text(
-              'Hey Mahesh',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),),
+      backgroundColor: const Color.fromARGB(255, 11, 12, 19),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: const Text(
+          'Hey Mahesh',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: Column(
         children: [
-          // Header Section
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-           
-          ),
-          // Flow Path Section
           Expanded(
             child: Stack(
               children: [
@@ -39,8 +49,8 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                 ),
                 // Positioned nodes
                 _buildNode(
-                  top: 100,
-                  left: 50,
+                  top: 10,
+                  left: 200,
                   label: 'Adjectives',
                   isSelected: selectedDay == 1,
                   onTap: () => setState(() => selectedDay = 1),
@@ -98,9 +108,11 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: isSelected ? Colors.green : Colors.blueGrey,
+            color: isSelected
+                ? const Color.fromARGB(255, 48, 96, 50)
+                : const Color.fromARGB(255, 43, 54, 59),
             borderRadius: BorderRadius.circular(20),
             boxShadow: isSelected
                 ? [
@@ -114,7 +126,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
           ),
           child: Text(
             label,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ),
@@ -134,24 +146,24 @@ class FlowPathPainter extends CustomPainter {
     final path = Path();
 
     // First curve: Adjectives to Adverbs
-    path.moveTo(70, 110); // Starting point
-    path.quadraticBezierTo(100, 150, 140, 210); // Control and end points
+    path.moveTo(220, 20); // Start point of "Adjectives"
+    path.quadraticBezierTo(200, 120, 150, 200); // Control point and end point for "Adverbs"
 
     // Second curve: Adverbs to Conjunctions
-    path.moveTo(140, 210);
-    path.quadraticBezierTo(80, 260, 80, 310);
+    path.moveTo(150, 200); // Start point of "Adverbs"
+    path.quadraticBezierTo(100, 260, 90, 300); // Control point and end point for "Conjunctions"
 
     // Third curve: Conjunctions to Prefix & Suffix
-    path.moveTo(80, 310);
-    path.quadraticBezierTo(130, 360, 150, 410);
+    path.moveTo(90, 300); // Start point of "Conjunctions"
+    path.quadraticBezierTo(130, 360, 150, 400); // Control point and end point for "Prefix & Suffix"
 
     // Fourth curve: Prefix & Suffix to Sentence structure
-    path.moveTo(150, 410);
-    path.quadraticBezierTo(60, 460, 60, 510);
+    path.moveTo(150, 400); // Start point of "Prefix & Suffix"
+    path.quadraticBezierTo(50, 460, 60, 500); // Control point and end point for "Sentence structure"
 
     // Fifth curve: Sentence structure to Verbs
-    path.moveTo(60, 510);
-    path.quadraticBezierTo(120, 560, 120, 610);
+    path.moveTo(60, 500); // Start point of "Sentence structure"
+    path.quadraticBezierTo(100, 570, 120, 600); // Control point and end point for "Verbs"
 
     canvas.drawPath(path, paint);
   }

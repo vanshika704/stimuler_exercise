@@ -45,7 +45,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   isCompleted: selectedDay > 1,
                   onTap: () {
                     setState(() => selectedDay = 1);
-                    snackbarController.showSnackbar('You clicked on Adjectives!');
+                    snackbarController.showModal('You clicked on Adjectives!');
                   },
                 ),
                 _buildNode(
@@ -56,7 +56,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   isCompleted: selectedDay > 2,
                   onTap: () {
                     setState(() => selectedDay = 2);
-                    snackbarController.showSnackbar('You clicked on Adverbs!');
+                    snackbarController.showModal('You clicked on Adverbs!');
                   },
                 ),
                 _buildNode(
@@ -67,7 +67,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   isCompleted: selectedDay > 3,
                   onTap: () {
                     setState(() => selectedDay = 3);
-                    snackbarController.showSnackbar('You clicked on Conjunctions!');
+                    snackbarController.showModal('You clicked on Conjunctions!');
                   },
                 ),
                 _buildNode(
@@ -78,7 +78,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   isCompleted: selectedDay > 4,
                   onTap: () {
                     setState(() => selectedDay = 4);
-                    snackbarController.showSnackbar('You clicked on Prefix & Suffix!');
+                    snackbarController.showModal('You clicked on Prefix & Suffix!');
                   },
                 ),
                 _buildNode(
@@ -89,7 +89,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   isCompleted: selectedDay > 5,
                   onTap: () {
                     setState(() => selectedDay = 5);
-                    snackbarController.showSnackbar('You clicked on Sentence Structure!');
+                    snackbarController.showModal('You clicked on Sentence Structure!');
                   },
                 ),
                 _buildNode(
@@ -100,7 +100,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   isCompleted: selectedDay > 6,
                   onTap: () {
                     setState(() => selectedDay = 6);
-                    snackbarController.showSnackbar('You clicked on Verbs!');
+                    snackbarController.showModal('You clicked on Verbs!');
                   },
                 ),
               ],

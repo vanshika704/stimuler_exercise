@@ -55,9 +55,9 @@ class SnackbarController extends GetxController {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          elevation: node['state'] == 'selected' ? 10 : 0, // Elevation for selected state
+                          elevation:  0, // Elevation for selected state
                           shadowColor: node['state'] == 'selected'
-                              ? Colors.purpleAccent
+                              ? Color.fromARGB(255, 168, 106, 255)
                               : Colors.transparent, // Glowing effect for selected state
                         ),
                         child: Row(
@@ -65,10 +65,9 @@ class SnackbarController extends GetxController {
                           children: [
                             Row(
                               children: [
+                                const SizedBox(width: 10),
                                 CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                    node['icon'] ?? '',
-                                  ),
+                                  backgroundImage: AssetImage(node['icon'] ?? ''), // Ensure image is loaded properly
                                   radius: 18, // Profile picture or icon
                                 ),
                                 const SizedBox(width: 10),
@@ -88,7 +87,9 @@ class SnackbarController extends GetxController {
                                 color: Colors.white70,
                               ),
                             ),
+                           
                           ],
+                          
                         ),
                       ),
                     );
@@ -109,10 +110,8 @@ class SnackbarController extends GetxController {
   Color _getButtonColor(Map<String, String> node) {
     if (node['state'] == 'completed') {
       return Colors.green;
-    } else if (node['state'] == 'selected') {
-      return Colors.purple;
-    }
-    return const Color.fromARGB(255, 48, 37, 71); // Default button color
+    } 
+    return Colors.transparent; // Default button color
   }
 
   // Get border color based on state
@@ -120,8 +119,9 @@ class SnackbarController extends GetxController {
     if (node['state'] == 'completed') {
       return Colors.green;
     } else if (node['state'] == 'selected' || node['state'] == 'active') {
-      return Colors.purple;
+      return Color.fromARGB(255, 168, 106, 255);
     }
+    
     return Colors.transparent;
   }
 }

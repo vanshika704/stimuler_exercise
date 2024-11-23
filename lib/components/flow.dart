@@ -14,13 +14,49 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
 
   // Define the nodes with labels and their respective routes
   List<Map<String, String>> nodes = [
-    {'label': 'Adjectives', 'route': '/adjectives'},
-    {'label': 'Adverbs', 'route': '/adverbs'},
-    {'label': 'Conjunctions', 'route': '/conjunctions'},
-    {'label': 'Prefix & Suffix', 'route': '/prefix_suffix'},
-    {'label': 'Sentence structure', 'route': '/sentence_structure'},
-    {'label': 'Verbs', 'route': '/verbs',},
-  ];
+  {
+    'label': 'Adjectives', 
+    'route': '/adjectives', 
+    'state': 'completed',
+    'icon': 'assets/adjectives.png',  // URL or path to the icon
+    'progress': '75%'  // Or any progress description you want to show
+  },
+  {
+    'label': 'Adverbs', 
+    'route': '/adverbs', 
+    'state': 'selected',
+    'icon': 'assets/adverbs.jpg',
+    'progress': '40%'
+  },
+  {
+    'label': 'Conjunctions', 
+    'route': '/conjunctions', 
+    'state': 'default',
+    'icon': 'assets/conjunction.jpeg',
+    'progress': '10%'
+  },
+  {
+    'label': 'Prefix & Suffix', 
+    'route': '/prefix_suffix', 
+    'state': 'default',
+    'icon': 'assets/Prefix-and-Suffix-Activity-Ideas-Cover-and-Facebook.png',
+    'progress': '50%'
+  },
+  {
+    'label': 'Sentence structure', 
+    'route': '/sentence_structure', 
+    'state': 'default',
+    'icon': 'assets/Sentence-structure.webp',
+    'progress': '30%'
+  },
+  {
+    'label': 'Verbs', 
+    'route': '/verbs', 
+    'state': 'default',
+    'icon': 'assets/verbs_ver_1.png',
+    'progress': '60%'
+  },
+];
 
   @override
   Widget build(BuildContext context) {

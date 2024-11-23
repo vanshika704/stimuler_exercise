@@ -44,39 +44,39 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   onTap: () => setState(() => selectedDay = 1),
                 ),
                 _buildNode(
-                  top: 200,
-                  left: 120,
+                  top: 100,
+                  left: 30,
                   label: 'Adverbs',
                   isSelected: selectedDay == 2,
                   isCompleted: selectedDay > 2,
                   onTap: () => setState(() => selectedDay = 2),
                 ),
                 _buildNode(
-                  top: 300,
-                  left: 70,
+                  top: 220,
+                  left: 40,
                   label: 'Conjunctions',
                   isSelected: selectedDay == 3,
                   isCompleted: selectedDay > 3,
                   onTap: () => setState(() => selectedDay = 3),
                 ),
                 _buildNode(
-                  top: 400,
-                  left: 120,
+                  top: 300,
+                  left: 140,
                   label: 'Prefix & Suffix',
                   isSelected: selectedDay == 4,
                   isCompleted: selectedDay > 4,
                   onTap: () => setState(() => selectedDay = 4),
                 ),
                 _buildNode(
-                  top: 500,
-                  left: 50,
+                  top: 430,
+                  left: 40,
                   label: 'Sentence structure',
                   isSelected: selectedDay == 5,
                   isCompleted: selectedDay > 5,
                   onTap: () => setState(() => selectedDay = 5),
                 ),
                 _buildNode(
-                  top: 600,
+                  top: 530,
                   left: 100,
                   label: 'Verbs',
                   isSelected: selectedDay == 6,
@@ -131,7 +131,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                           ]
                         : isCompleted
                             ? [
-                                BoxShadow(
+                                const BoxShadow(
                                   color: Colors.greenAccent,
                                   blurRadius: 10,
                                   spreadRadius: 3,
@@ -196,24 +196,25 @@ class FlowPathPainter extends CustomPainter {
     final path = Path();
 
     // First curve: Adjectives to Adverbs
-    path.moveTo(150, 30); // Center of "Adjectives" node
-    path.quadraticBezierTo(200, 120, 150, 220); // Control point and center of "Adverbs"
+    path.moveTo(170, 50); // Center of "Adjectives" node
+    path.quadraticBezierTo(20, 100, 50, 130); // Control point and center of "Adverbs"
 
     // Second curve: Adverbs to Conjunctions
-    path.moveTo(150, 220); // Center of "Adverbs" node
-    path.quadraticBezierTo(100, 260, 90, 320); // Control point and center of "Conjunctions"
+    path.moveTo(50, 130); // Center of "Adverbs" node
+    path.quadraticBezierTo(30, 180, 60, 230); // Control point and center of "Conjunctions"
 
     // Third curve: Conjunctions to Prefix & Suffix
-    path.moveTo(90, 320); // Center of "Conjunctions" node
-    path.quadraticBezierTo(130, 360, 150, 420); // Control point and center of "Prefix & Suffix"
+    path.moveTo(60, 250); // Center of "Conjunctions" node
+    path.quadraticBezierTo(100, 280, 170, 330); // Control point and center of "Prefix & Suffix"
 
     // Fourth curve: Prefix & Suffix to Sentence structure
-    path.moveTo(150, 420); // Center of "Prefix & Suffix" node
-    path.quadraticBezierTo(50, 460, 60, 520); // Control point and center of "Sentence structure"
+    path.moveTo(170, 340); // Center of "Prefix & Suffix" node
+    path.quadraticBezierTo(200, 380, 70, 450); // Control point and center of "Sentence structure"
 
     // Fifth curve: Sentence structure to Verbs
-    path.moveTo(60, 520); // Center of "Sentence structure" node
-    path.quadraticBezierTo(100, 570, 120, 620); // Control point and center of "Verbs"
+    path.moveTo(60, 470); // Center of "Sentence structure" node
+    path.quadraticBezierTo(100, 500, 120, 570); // Control point and center of "Verbs"
+
 
     canvas.drawPath(path, paint);
   }

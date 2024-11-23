@@ -214,6 +214,8 @@ class FlowPathPainter extends CustomPainter {
     // Fifth curve: Sentence structure to Verbs
     path.moveTo(60, 470); // Center of "Sentence structure" node
     path.quadraticBezierTo(100, 500, 120, 570); // Control point and center of "Verbs"
+path.moveTo(190, 770); // Center of "Sentence structure" node
+    path.quadraticBezierTo(100, 500, 120, 570); // Control point and center of "Verbs"
 
 
     canvas.drawPath(path, paint);

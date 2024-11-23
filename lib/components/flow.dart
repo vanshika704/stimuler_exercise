@@ -159,11 +159,11 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                     ? const Color.fromARGB(255, 135, 69, 226)
                     : isCompleted
                         ? const Color.fromARGB(255, 48, 96, 50)
-                        : const Color.fromARGB(255, 43, 54, 59),
+                        :  Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
-                elevation: 5,
+                elevation: 0,
               ),
               child: Text(
                 label,

@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
-
 class FlowPathScreen extends StatefulWidget {
   @override
   _FlowPathScreenState createState() => _FlowPathScreenState();
@@ -32,7 +31,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                 // Custom Paint for the curves
                 CustomPaint(
                   size: Size(double.infinity, double.infinity),
-                  painter: FlowPathPainter(),
+                  painter: FlowPathPainter(selectedDay: selectedDay),
                 ),
                 // Positioned nodes
                 _buildNode(
@@ -91,7 +90,6 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
     );
   }
 
-  // Helper method to build nodes
   Widget _buildNode({
     required double top,
     required double left,
@@ -110,16 +108,15 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
             Stack(
               alignment: Alignment.center,
               children: [
-                // Outer circle
                 Container(
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? const Color.fromARGB(255, 135, 69, 226) // Active color
+                        ? const Color.fromARGB(255, 135, 69, 226)
                         : isCompleted
-                            ? const Color.fromARGB(255, 48, 96, 50) // Completed color
-                            : const Color.fromARGB(255, 43, 54, 59), // Default color
+                            ? const Color.fromARGB(255, 48, 96, 50)
+                            : const Color.fromARGB(255, 43, 54, 59),
                     shape: BoxShape.circle,
                     boxShadow: isSelected
                         ? [
@@ -140,7 +137,6 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                             : [],
                   ),
                 ),
-                // Inner circle
                 Container(
                   width: 15,
                   height: 15,
@@ -148,8 +144,8 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                     color: Colors.transparent,
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Colors.white, // Border color
-                      width: 2, // Border width
+                      color: Colors.white,
+                      width: 2,
                     ),
                   ),
                 ),
@@ -160,10 +156,10 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
               onPressed: onTap,
               style: ElevatedButton.styleFrom(
                 backgroundColor: isSelected
-                    ? const Color.fromARGB(255, 135, 69, 226) // Match active node color
+                    ? const Color.fromARGB(255, 135, 69, 226)
                     : isCompleted
-                        ? const Color.fromARGB(255, 48, 96, 50) // Match completed node color
-                        : const Color.fromARGB(255, 43, 54, 59), // Default color
+                        ? const Color.fromARGB(255, 48, 96, 50)
+                        : const Color.fromARGB(255, 43, 54, 59),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
@@ -172,7 +168,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
               child: Text(
                 label,
                 style: GoogleFonts.quicksand(
-                  color: Colors.white, // Text color
+                  color: Colors.white,
                   fontSize: 16,
                 ),
               ),
@@ -184,43 +180,65 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
   }
 }
 
-// Custom Painter for the curved paths
 class FlowPathPainter extends CustomPainter {
+  final int selectedDay;
+
+  FlowPathPainter({required this.selectedDay});
+
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
+    Paint paint = Paint()
       ..color = const Color.fromARGB(255, 31, 31, 31)
       ..strokeWidth = 10
       ..style = PaintingStyle.stroke;
 
-    final path = Path();
+    Paint glowPaint = Paint()
+      ..color = const Color.fromARGB(255, 48, 96, 50)
+      ..strokeWidth = 12
+      ..style = PaintingStyle.stroke
+      ..maskFilter = MaskFilter.blur(BlurStyle.inner, 10);
+
+    Path path = Path();
 
     // First curve: Adjectives to Adverbs
-    path.moveTo(170, 50); // Center of "Adjectives" node
-    path.quadraticBezierTo(20, 100, 50, 130); // Control point and center of "Adverbs"
+    path.moveTo(170, 50);
+    path.quadraticBezierTo(20, 100, 50, 130);
+    canvas.drawPath(path, selectedDay >= 2 ? glowPaint : paint);
 
     // Second curve: Adverbs to Conjunctions
-    path.moveTo(50, 130); // Center of "Adverbs" node
-    path.quadraticBezierTo(30, 180, 60, 230); // Control point and center of "Conjunctions"
+    path = Path();
+    path.moveTo(50, 130);
+    path.quadraticBezierTo(30, 180, 60, 230);
+    canvas.drawPath(path, selectedDay >= 3 ? glowPaint : paint);
 
     // Third curve: Conjunctions to Prefix & Suffix
-    path.moveTo(60, 250); // Center of "Conjunctions" node
-    path.quadraticBezierTo(100, 280, 170, 330); // Control point and center of "Prefix & Suffix"
+    path = Path();
+    path.moveTo(60, 250);
+    path.quadraticBezierTo(100, 280, 170, 330);
+    canvas.drawPath(path, selectedDay >= 4 ? glowPaint : paint);
 
     // Fourth curve: Prefix & Suffix to Sentence structure
-    path.moveTo(170, 340); // Center of "Prefix & Suffix" node
-    path.quadraticBezierTo(200, 380, 70, 450); // Control point and center of "Sentence structure"
+    path = Path();
+    path.moveTo(170, 340);
+    path.quadraticBezierTo(200, 380, 70, 450);
+    canvas.drawPath(path, selectedDay >= 5 ? glowPaint : paint);
 
     // Fifth curve: Sentence structure to Verbs
-    path.moveTo(60, 470); // Center of "Sentence structure" node
+    path = Path();
+    path.moveTo(60, 470);
+    path.quadraticBezierTo(100, 500, 120, 570);
+    canvas.drawPath(path, selectedDay >= 6 ? glowPaint : paint);
+    path.moveTo(190, 770); // Center of "Sentence structure" node
     path.quadraticBezierTo(100, 500, 120, 570); // Control point and center of "Verbs"
-path.moveTo(190, 770); // Center of "Sentence structure" node
-    path.quadraticBezierTo(100, 500, 120, 570); // Control point and center of "Verbs"
+ canvas.drawPath(path, selectedDay >= 6 ? glowPaint : paint);
 
-
-    canvas.drawPath(path, paint);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
+
+
+
+
+

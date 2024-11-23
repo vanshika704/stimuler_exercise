@@ -1,6 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart'; // Import GetX package
 import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
+import 'snackbar.dart' as customSnackbar; // Alias custom SnackbarController
+
 class FlowPathScreen extends StatefulWidget {
   @override
   _FlowPathScreenState createState() => _FlowPathScreenState();
@@ -8,6 +10,7 @@ class FlowPathScreen extends StatefulWidget {
 
 class _FlowPathScreenState extends State<FlowPathScreen> {
   int selectedDay = 1;
+  final customSnackbar.SnackbarController snackbarController = Get.put(customSnackbar.SnackbarController());  // Use custom SnackbarController
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,10 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   label: 'Adjectives',
                   isSelected: selectedDay == 1,
                   isCompleted: selectedDay > 1,
-                  onTap: () => setState(() => selectedDay = 1),
+                  onTap: () {
+                    setState(() => selectedDay = 1);
+                    snackbarController.showSnackbar('You clicked on Adjectives!');
+                  },
                 ),
                 _buildNode(
                   top: 100,
@@ -48,7 +54,10 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   label: 'Adverbs',
                   isSelected: selectedDay == 2,
                   isCompleted: selectedDay > 2,
-                  onTap: () => setState(() => selectedDay = 2),
+                  onTap: () {
+                    setState(() => selectedDay = 2);
+                    snackbarController.showSnackbar('You clicked on Adverbs!');
+                  },
                 ),
                 _buildNode(
                   top: 220,
@@ -56,7 +65,10 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   label: 'Conjunctions',
                   isSelected: selectedDay == 3,
                   isCompleted: selectedDay > 3,
-                  onTap: () => setState(() => selectedDay = 3),
+                  onTap: () {
+                    setState(() => selectedDay = 3);
+                    snackbarController.showSnackbar('You clicked on Conjunctions!');
+                  },
                 ),
                 _buildNode(
                   top: 300,
@@ -64,7 +76,10 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   label: 'Prefix & Suffix',
                   isSelected: selectedDay == 4,
                   isCompleted: selectedDay > 4,
-                  onTap: () => setState(() => selectedDay = 4),
+                  onTap: () {
+                    setState(() => selectedDay = 4);
+                    snackbarController.showSnackbar('You clicked on Prefix & Suffix!');
+                  },
                 ),
                 _buildNode(
                   top: 430,
@@ -72,7 +87,10 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   label: 'Sentence structure',
                   isSelected: selectedDay == 5,
                   isCompleted: selectedDay > 5,
-                  onTap: () => setState(() => selectedDay = 5),
+                  onTap: () {
+                    setState(() => selectedDay = 5);
+                    snackbarController.showSnackbar('You clicked on Sentence Structure!');
+                  },
                 ),
                 _buildNode(
                   top: 530,
@@ -80,7 +98,10 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                   label: 'Verbs',
                   isSelected: selectedDay == 6,
                   isCompleted: selectedDay > 6,
-                  onTap: () => setState(() => selectedDay = 6),
+                  onTap: () {
+                    setState(() => selectedDay = 6);
+                    snackbarController.showSnackbar('You clicked on Verbs!');
+                  },
                 ),
               ],
             ),
@@ -159,7 +180,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                     ? const Color.fromARGB(255, 135, 69, 226)
                     : isCompleted
                         ? const Color.fromARGB(255, 48, 96, 50)
-                        :  Colors.transparent,
+                        : Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
@@ -200,45 +221,36 @@ class FlowPathPainter extends CustomPainter {
 
     Path path = Path();
 
-    // First curve: Adjectives to Adverbs
+    // Draw paths based on selected day to highlight them
     path.moveTo(170, 50);
     path.quadraticBezierTo(20, 100, 50, 130);
     canvas.drawPath(path, selectedDay >= 2 ? glowPaint : paint);
 
-    // Second curve: Adverbs to Conjunctions
     path = Path();
     path.moveTo(50, 130);
     path.quadraticBezierTo(30, 180, 60, 230);
     canvas.drawPath(path, selectedDay >= 3 ? glowPaint : paint);
 
-    // Third curve: Conjunctions to Prefix & Suffix
     path = Path();
     path.moveTo(60, 250);
     path.quadraticBezierTo(100, 280, 170, 330);
     canvas.drawPath(path, selectedDay >= 4 ? glowPaint : paint);
 
-    // Fourth curve: Prefix & Suffix to Sentence structure
     path = Path();
     path.moveTo(170, 340);
     path.quadraticBezierTo(200, 380, 70, 450);
     canvas.drawPath(path, selectedDay >= 5 ? glowPaint : paint);
 
-    // Fifth curve: Sentence structure to Verbs
     path = Path();
     path.moveTo(60, 470);
     path.quadraticBezierTo(100, 500, 120, 570);
     canvas.drawPath(path, selectedDay >= 6 ? glowPaint : paint);
+
     path.moveTo(190, 770); // Center of "Sentence structure" node
     path.quadraticBezierTo(100, 500, 120, 570); // Control point and center of "Verbs"
- canvas.drawPath(path, selectedDay >= 6 ? glowPaint : paint);
-
+    canvas.drawPath(path, selectedDay >= 6 ? glowPaint : paint);
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
-
-
-
-
-

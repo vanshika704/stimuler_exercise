@@ -36,7 +36,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
   void _generateNodePositions() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       double screenWidth = MediaQuery.of(context).size.width - 50; // 50px margin on both sides
-      double screenHeight = MediaQuery.of(context).size.height - 100; // 50px margin top and bottom
+      double screenHeight = MediaQuery.of(context).size.height - 120; // 50px margin top and bottom
 
       double topMargin = 50; // Fixed top margin
       double dynamicSpacing = (screenHeight - topMargin) / (topics.length - 1); // Dynamic vertical spacing

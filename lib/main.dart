@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     getPages: [
       GetPage(name: '/', page: () => FlowPathScreen()),
       GetPage(name: '/adjectives', page: () => AdjectivesPage()),
-      GetPage(name: '/adverbs', page: () => AdverbsPage()),
+      GetPage(name: '/adverbs', page: () => GrammarPracticeScreen()),
       GetPage(name: '/conjunctions', page: () => ConjunctionsPage()),
       GetPage(name: '/prefix_suffix', page: () => PrefixSuffixPage()),
       GetPage(name: '/sentence_structure', page: () => SentenceStructurePage()),

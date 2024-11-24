@@ -24,12 +24,12 @@ class MyApp extends StatelessWidget {
        initialRoute: '/',
     getPages: [
       GetPage(name: '/', page: () => FlowPathScreen()),
-      GetPage(name: '/adjectives', page: () => AdjectivesPage()),
+      GetPage(name: '/adjectives', page: () => AdjectivesScreen()),
       GetPage(name: '/adverbs', page: () => GrammarPracticeScreen()),
-      GetPage(name: '/conjunctions', page: () => ConjunctionsPage()),
-      GetPage(name: '/prefix_suffix', page: () => PrefixSuffixPage()),
-      GetPage(name: '/sentence_structure', page: () => SentenceStructurePage()),
-      GetPage(name: '/verbs', page: () => VerbsPage()),
+      GetPage(name: '/conjunctions', page: () => ConjunctionsScreen()),
+      GetPage(name: '/prefix and suffix', page: () => PrefixSuffixScreen()),
+      GetPage(name: '/sentence formation', page: () => SentenceStructureQuizScreen()),
+      GetPage(name: '/verbs', page: () => VerbsQuizScreen()),
     ],
     );
    

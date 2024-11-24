@@ -231,7 +231,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
         'route': '/${topics[i].toLowerCase()}', // Dynamically generate the route
         'state': state,
         'icon': 'assets/${topics[i].toLowerCase()}.png',  // Dynamically set icon path
-        'progress': '75%'  // Adjust progress dynamically if needed
+        'progress': '5/5'  // Adjust progress dynamically if needed
       });
     }
     

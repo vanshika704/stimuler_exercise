@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GrammarPracticeScreen extends StatefulWidget {
@@ -81,6 +83,7 @@ class _GrammarPracticeScreenState extends State<GrammarPracticeScreen> {
               style: TextStyle(color: Colors.white),
             ),
             backgroundColor: const Color.fromARGB(255, 231, 84, 74),
+             duration: const Duration(seconds: 2),
           ),
         );
       }
@@ -93,6 +96,7 @@ class _GrammarPracticeScreenState extends State<GrammarPracticeScreen> {
           selectedOption = null;  // Reset the selected option
           isAnswerChecked = false; // Reset answer checked status
         } else {
+          Get.toNamed("/");
           quizCompleted = true;
           // Unlock next node here if all questions are answered
           ScaffoldMessenger.of(context).showSnackBar(
@@ -104,6 +108,7 @@ class _GrammarPracticeScreenState extends State<GrammarPracticeScreen> {
               backgroundColor: Colors.green,
             ),
           );
+          
         }
       }
     });
@@ -199,7 +204,7 @@ class _GrammarPracticeScreenState extends State<GrammarPracticeScreen> {
                   isAnswerChecked
                       ? (selectedOption == currentQuestion["answerIndex"]
                           ? "Correct!"
-                          : "Try Again!")
+                          : "That Wasn't right!")
                       : "Check Answer",
                   style: GoogleFonts.quicksand(color: Colors.white, fontSize: 16),
                 ),

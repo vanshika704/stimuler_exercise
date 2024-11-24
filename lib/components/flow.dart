@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:math';
+import 'package:google_fonts/google_fonts.dart';  // Import Google Fonts package
 
 // Use an alias to avoid the conflict between SnackbarController from different packages
 import 'package:exerciseapp/components/snackbar.dart' as customSnackbar;
@@ -67,7 +67,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
     TextPainter textPainter = TextPainter(
       text: TextSpan(
         text: text,
-        style: const TextStyle(fontSize: 14),
+        style: GoogleFonts.quicksand(fontSize: 14),  // Use Quicksand font here
       ),
       textDirection: TextDirection.ltr,
     )..layout();
@@ -90,9 +90,9 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
       backgroundColor: const Color.fromARGB(255, 11, 12, 19),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: const Text(
+        title: Text(
           'Hey Mahesh',
-          style: TextStyle(
+          style: GoogleFonts.quicksand(  // Use Quicksand font for AppBar title
             color: Colors.white,
             fontSize: 28,
           ),
@@ -202,7 +202,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
             ),
             child: Text(
               label,
-              style: const TextStyle(
+              style: GoogleFonts.quicksand(  // Use Quicksand font for button text
                 color: Colors.white,
                 fontSize: 14,
               ),
@@ -215,50 +215,50 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
 
   // Custom modal using the customSnackbar logic
   void _showCustomModal(String topic) {
-   List<Map<String, String>> nodes = [
-    {
-      'label': 'Adjectives', 
-      'route': '/adjectives', 
-      'state': 'completed',
-      'icon': 'assets/adjectives.png',  // URL or path to the icon
-      'progress': '75%'  // Or any progress description you want to show
-    },
-    {
-      'label': 'Adverbs', 
-      'route': '/adverbs', 
-      'state': 'selected',
-      'icon': 'assets/adverbs.jpg',
-      'progress': '40%'
-    },
-    {
-      'label': 'Conjunctions', 
-      'route': '/conjunctions', 
-      'state': 'default',
-      'icon': 'assets/conjunction.jpeg',
-      'progress': '10%'
-    },
-    {
-      'label': 'Prefix & Suffix', 
-      'route': '/prefix_suffix', 
-      'state': 'default',
-      'icon': 'assets/Prefix-and-Suffix-Activity-Ideas-Cover-and-Facebook.png',
-      'progress': '50%'
-    },
-    {
-      'label': 'Sentence structure', 
-      'route': '/sentence_structure', 
-      'state': 'default',
-      'icon': 'assets/Sentence-structure.webp',
-      'progress': '30%'
-    },
-    {
-      'label': 'Verbs', 
-      'route': '/verbs', 
-      'state': 'default',
-      'icon': 'assets/verbs_ver_1.png',
-      'progress': '60%'
-    },
-  ];
+    List<Map<String, String>> nodes = [
+      {
+        'label': 'Adjectives', 
+        'route': '/adjectives', 
+        'state': 'completed',
+        'icon': 'assets/adjectives.png',  // URL or path to the icon
+        'progress': '75%'  // Or any progress description you want to show
+      },
+      {
+        'label': 'Adverbs', 
+        'route': '/adverbs', 
+        'state': 'selected',
+        'icon': 'assets/adverbs.jpg',
+        'progress': '40%'
+      },
+      {
+        'label': 'Conjunctions', 
+        'route': '/conjunctions', 
+        'state': 'default',
+        'icon': 'assets/conjunction.jpeg',
+        'progress': '10%'
+      },
+      {
+        'label': 'Prefix & Suffix', 
+        'route': '/prefix_suffix', 
+        'state': 'default',
+        'icon': 'assets/Prefix-and-Suffix-Activity-Ideas-Cover-and-Facebook.png',
+        'progress': '50%'
+      },
+      {
+        'label': 'Sentence structure', 
+        'route': '/sentence_structure', 
+        'state': 'default',
+        'icon': 'assets/Sentence-structure.webp',
+        'progress': '30%'
+      },
+      {
+        'label': 'Verbs', 
+        'route': '/verbs', 
+        'state': 'default',
+        'icon': 'assets/verbs_ver_1.png',
+        'progress': '60%'
+      },
+    ];
 
     snackbarController.showModal('Choose Exercise', nodes); // Show the modal with provided nodes
   }

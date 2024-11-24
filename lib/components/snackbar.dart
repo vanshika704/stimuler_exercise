@@ -1,5 +1,5 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SnackbarController extends GetxController {
@@ -28,7 +28,7 @@ class SnackbarController extends GetxController {
             children: [
               Center(
                 child: Text(
-                  'Choose Exercise',
+                  message,  // Use the dynamic message passed to the modal
                   style: GoogleFonts.quicksand(
                     color: Colors.white,
                     fontSize: 25,
@@ -87,9 +87,7 @@ class SnackbarController extends GetxController {
                                 color: Colors.white70,
                               ),
                             ),
-                           
                           ],
-                          
                         ),
                       ),
                     );
@@ -110,7 +108,9 @@ class SnackbarController extends GetxController {
   Color _getButtonColor(Map<String, String> node) {
     if (node['state'] == 'completed') {
       return Colors.green;
-    } 
+    } else if (node['state'] == 'selected') {
+      return Color.fromARGB(255, 135, 69, 226); // Highlight selected node
+    }
     return Colors.transparent; // Default button color
   }
 
@@ -118,10 +118,9 @@ class SnackbarController extends GetxController {
   Color _getBorderColor(Map<String, String> node) {
     if (node['state'] == 'completed') {
       return Colors.green;
-    } else if (node['state'] == 'selected' || node['state'] == 'active') {
-      return Color.fromARGB(255, 168, 106, 255);
+    } else if (node['state'] == 'selected') {
+      return Color.fromARGB(255, 168, 106, 255); // Glow effect for selected state
     }
-    
     return Colors.transparent;
   }
 }

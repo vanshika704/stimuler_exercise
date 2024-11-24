@@ -215,52 +215,27 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
 
   // Custom modal using the customSnackbar logic
   void _showCustomModal(String topic) {
-    List<Map<String, String>> nodes = [
-      {
-        'label': 'Adjectives', 
-        'route': '/adjectives', 
-        'state': 'completed',
-        'icon': 'assets/adjectives.png',  // URL or path to the icon
-        'progress': '75%'  // Or any progress description you want to show
-      },
-      {
-        'label': 'Adverbs', 
-        'route': '/adverbs', 
-        'state': 'selected',
-        'icon': 'assets/adverbs.jpg',
-        'progress': '40%'
-      },
-      {
-        'label': 'Conjunctions', 
-        'route': '/conjunctions', 
-        'state': 'default',
-        'icon': 'assets/conjunction.jpeg',
-        'progress': '10%'
-      },
-      {
-        'label': 'Prefix & Suffix', 
-        'route': '/prefix_suffix', 
-        'state': 'default',
-        'icon': 'assets/Prefix-and-Suffix-Activity-Ideas-Cover-and-Facebook.png',
-        'progress': '50%'
-      },
-      {
-        'label': 'Sentence structure', 
-        'route': '/sentence_structure', 
-        'state': 'default',
-        'icon': 'assets/Sentence-structure.webp',
-        'progress': '30%'
-      },
-      {
-        'label': 'Verbs', 
-        'route': '/verbs', 
-        'state': 'default',
-        'icon': 'assets/verbs_ver_1.png',
-        'progress': '60%'
-      },
-    ];
-
-    snackbarController.showModal('Choose Exercise', nodes); // Show the modal with provided nodes
+    List<Map<String, String>> nodes = [];
+    
+    for (int i = 0; i < topics.length; i++) {
+      String state = 'default';
+      
+      if (i + 1 == selectedDay) {
+        state = 'selected'; // Mark current topic as 'selected'
+      } else if (i + 1 < selectedDay) {
+        state = 'completed'; // Mark completed topics
+      }
+      
+      nodes.add({
+        'label': topics[i], 
+        'route': '/${topics[i].toLowerCase()}', // Dynamically generate the route
+        'state': state,
+        'icon': 'assets/${topics[i].toLowerCase()}.png',  // Dynamically set icon path
+        'progress': '75%'  // Adjust progress dynamically if needed
+      });
+    }
+    
+    snackbarController.showModal('Choose Exercise', nodes); // Show the modal with updated nodes
   }
 }
 
@@ -307,26 +282,30 @@ class FlowPathPainter extends CustomPainter {
     // Glow effect for completed days
     if (selectedDay > 1) {
       Path glowPath = Path();
-      for (int i = 0; i < selectedDay - 1; i++) {
-        Offset start = nodePositions[i];
-        Offset end = nodePositions[i + 1];
-        Offset control1 = Offset((start.dx + end.dx) / 2, start.dy + 30);
-        Offset control2 = Offset((start.dx + end.dx) / 2, end.dy - 30);
+      for (int i = 0; i < nodePositions.length - 1; i++) {
+        if (i + 1 < selectedDay) {
+          Offset start = nodePositions[i];
+          Offset end = nodePositions[i + 1];
+          Offset control1 = Offset((start.dx + end.dx) / 2, start.dy + 30);
+          Offset control2 = Offset((start.dx + end.dx) / 2, end.dy - 30);
 
-        glowPath.moveTo(start.dx, start.dy);
-        glowPath.cubicTo(
-          control1.dx,
-          control1.dy,
-          control2.dx,
-          control2.dy,
-          end.dx,
-          end.dy,
-        );
+          glowPath.moveTo(start.dx, start.dy);
+          glowPath.cubicTo(
+            control1.dx,
+            control1.dy,
+            control2.dx,
+            control2.dy,
+            end.dx,
+            end.dy,
+          );
+        }
       }
       canvas.drawPath(glowPath, glowPathPaint);
     }
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
 }

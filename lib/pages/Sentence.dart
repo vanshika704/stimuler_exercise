@@ -138,13 +138,13 @@ class _SentenceStructureQuizScreenState
                 style: GoogleFonts.quicksand(color: Colors.white, fontSize: 16),
               ),
               const SizedBox(height: 16),
-              Image.asset(
-                currentQuestion["image"],
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: 140,
-              ),
-              const SizedBox(height: 16),
+              // Image.asset(
+              //   currentQuestion["image"],
+              //   fit: BoxFit.cover,
+              //   width: double.infinity,
+              //   height: 140,
+              // ),
+              const SizedBox(height: 150),
               // Wrap the options in an expanded container
               ...List.generate(
                 currentQuestion["options"].length,

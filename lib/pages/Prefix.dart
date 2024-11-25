@@ -21,25 +21,25 @@ class _PrefixSuffixScreenState extends State<PrefixSuffixScreen> {
       "question": "The researcher's _ analysis of the data revealed several anomalies.",
       "options": ["meta", "pseudo", "anti", "poly"],
       "answerIndex": 0,
-      "image": "assets/ad1.png",
+      // "image": "assets/ad1.png",
     },
     {
       "question": "The team developed a _ solution that addressed multiple problems simultaneously.",
       "options": ["mono", "uni", "multi", "bi"],
       "answerIndex": 2,
-      "image": "assets/ad2.jpg",
+      // "image": "assets/ad2.jpg",
     },
     {
       "question": "The _ of quantum mechanics requires extensive mathematical knowledge.",
       "options": ["complexity", "complexify", "complexification", "complexize"],
       "answerIndex": 2,
-      "image": "assets/ad3.webp",
+      // "image": "assets/ad3.webp",
     },
     {
       "question": "The artificial intelligence showed remarkable _ in problem-solving tasks.",
       "options": ["adaptable", "adaptability", "adaptation", "adaptive"],
       "answerIndex": 1,
-      "image": "assets/ad4.webp",
+      // "image": "assets/ad4.webp",
     },
   ];
 
@@ -137,16 +137,16 @@ class _PrefixSuffixScreenState extends State<PrefixSuffixScreen> {
                 style: GoogleFonts.quicksand(color: Colors.white, fontSize: 16),
               ),
               const SizedBox(height: 16),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                child: Image.asset(
-                  currentQuestion["image"],
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 140, // Limit image height for better fit
-                ),
-              ),
-              const SizedBox(height: 24),
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(12.0),
+              //   child: Image.asset(
+              //     currentQuestion["image"],
+              //     fit: BoxFit.cover,
+              //     width: double.infinity,
+              //     height: 140, // Limit image height for better fit
+              //   ),
+              // ),
+              const SizedBox(height: 150),
               Column(
                 children: List.generate(
                   currentQuestion["options"].length,

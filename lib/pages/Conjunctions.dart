@@ -22,28 +22,28 @@ class _ConjunctionsScreenState extends State<ConjunctionsScreen> {
           "_ did the research paper receive acclaim for its methodology, _ it was praised for its innovative conclusions.",
       "options": ["Not only / but also", "Either / or", "Neither / nor", "Both / and"],
       "answerIndex": 0,
-      "image": "assets/ad1.png",
+      // "image": "assets/ad1.png",
     },
     {
       "question":
           "_ the quantum theory _ the string theory could fully explain the observed phenomena.",
       "options": ["Both / and", "Either / or", "Neither / nor", "Not only / but also"],
       "answerIndex": 2,
-      "image": "assets/ad2.jpg",
+      // "image": "assets/ad2.jpg",
     },
     {
       "question":
           "The experiment yielded unexpected results _ the researchers followed the protocol precisely.",
       "options": ["although", "because", "unless", "if"],
       "answerIndex": 0,
-      "image": "assets/ad3.webp",
+      // "image": "assets/ad3.webp",
     },
     {
       "question":
           "The archaeological team will continue excavating _ they find evidence of the ancient civilization.",
       "options": ["unless", "until", "while", "whereas"],
       "answerIndex": 1,
-      "image": "assets/ad4.webp",
+      // "image": "assets/ad4.webp",
     },
   ];
 
@@ -141,16 +141,16 @@ class _ConjunctionsScreenState extends State<ConjunctionsScreen> {
                 style: GoogleFonts.quicksand(color: Colors.white, fontSize: 16),
               ),
               const SizedBox(height: 16),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                child: Image.asset(
-                  currentQuestion["image"],
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 140, // Limit image height for better fit
-                ),
-              ),
-              const SizedBox(height: 24),
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(12.0),
+              //   child: Image.asset(
+              //     currentQuestion["image"],
+              //     fit: BoxFit.cover,
+              //     width: double.infinity,
+              //     height: 140, // Limit image height for better fit
+              //   ),
+              // ),
+              const SizedBox(height: 150),
               Column(
                 children: List.generate(
                   currentQuestion["options"].length,

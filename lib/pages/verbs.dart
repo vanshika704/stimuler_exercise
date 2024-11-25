@@ -45,7 +45,12 @@ class _VerbsQuizScreenState extends State<VerbsQuizScreen> {
       "exercise": "Exercise 2: Modal Perfect Verbs",
       "question":
           "The experiment _ different results if the temperature had been controlled more precisely.",
-      "options": ["might yield", "might have yielded", "must yield", "must have yielded"],
+      "options": [
+        "might yield",
+        "might have yielded",
+        "must yield",
+        "must have yielded"
+      ],
       "answerIndex": 1,
       "image": "assets/modal_perfect1.png",
     },
@@ -60,7 +65,12 @@ class _VerbsQuizScreenState extends State<VerbsQuizScreen> {
     {
       "exercise": "Exercise 3: Subjunctive Mood",
       "question": "The ethics committee recommended that the study _ immediately.",
-      "options": ["be terminated", "is terminated", "was terminated", "were terminated"],
+      "options": [
+        "be terminated",
+        "is terminated",
+        "was terminated",
+        "were terminated"
+      ],
       "answerIndex": 0,
       "image": "assets/subjunctive1.png",
     },
@@ -87,30 +97,28 @@ class _VerbsQuizScreenState extends State<VerbsQuizScreen> {
               'Wrong! The correct answer is: ${questions[currentQuestionIndex]["options"][questions[currentQuestionIndex]["answerIndex"]]}',
               style: TextStyle(color: Colors.white),
             ),
-            backgroundColor: const Color.fromARGB(255, 231, 84, 74),
+            backgroundColor: const Color.fromARGB(255, 137, 57, 51),
             duration: const Duration(seconds: 2),
           ),
         );
       }
 
-      // Only move to the next question if the answer is correct
-      if (selectedOption == questions[currentQuestionIndex]["answerIndex"]) {
-        if (currentQuestionIndex < questions.length - 1) {
-          currentQuestionIndex++;
-          selectedOption = null;
-          isAnswerChecked = false;
-        } else {
-          quizCompleted = true;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'Quiz Completed! Unlocking next topic...',
-                style: TextStyle(color: Colors.white),
-              ),
-              backgroundColor: Colors.green,
+      // Move to the next question or mark quiz as completed
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        selectedOption = null;
+        isAnswerChecked = false;
+      } else {
+        quizCompleted = true;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Quiz Completed! Unlocking next topic...',
+              style: TextStyle(color: Colors.white),
             ),
-          );
-        }
+            backgroundColor: Colors.green,
+          ),
+        );
       }
     });
   }
@@ -154,18 +162,14 @@ class _VerbsQuizScreenState extends State<VerbsQuizScreen> {
                 currentQuestion["question"],
                 style: GoogleFonts.quicksand(color: Colors.white, fontSize: 16),
               ),
+              const SizedBox(height: 160),
+              
               const SizedBox(height: 16),
-              Image.asset(
-                currentQuestion["image"],
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: 140,
-              ),
-              const SizedBox(height: 16),
-              // Wrap the options in an expanded container
+              // Uniformly sized options
               ...List.generate(
                 currentQuestion["options"].length,
-                (index) => Expanded(
+                (index) => SizedBox(
+                  height: 70,
                   child: _buildOption(
                     currentQuestion["options"][index],
                     index,
@@ -208,13 +212,17 @@ class _VerbsQuizScreenState extends State<VerbsQuizScreen> {
         margin: const EdgeInsets.symmetric(vertical: 8.0),
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: isSelected ? const Color.fromARGB(255, 135, 69, 226) : Colors.transparent,
+          color: isSelected
+              ? const Color.fromARGB(255, 135, 69, 226)
+              : Colors.transparent,
           border: Border.all(color: isSelected ? Colors.green : Colors.grey),
           borderRadius: BorderRadius.circular(8.0),
         ),
-        child: Text(
-          text,
-          style: GoogleFonts.quicksand(color: Colors.white, fontSize: 16),
+        child: Center(
+          child: Text(
+            text,
+            style: GoogleFonts.quicksand(color: Colors.white, fontSize: 16),
+          ),
         ),
       ),
     );

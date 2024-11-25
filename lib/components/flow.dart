@@ -1,8 +1,10 @@
+
+import 'dart:math';
+
 import 'package:exerciseapp/components/flowpathpainter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:math';
-import 'package:google_fonts/google_fonts.dart';  // Import Google Fonts package
+import 'package:google_fonts/google_fonts.dart';
 
 // Use an alias to avoid the conflict between SnackbarController from different packages
 import 'package:exerciseapp/components/snackbar.dart' as customSnackbar;
@@ -80,7 +82,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
   Widget build(BuildContext context) {
     if (nodePositions.isEmpty) {
       return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 11, 11, 15),
+        backgroundColor: const Color.fromARGB(255, 11, 12, 19),
         body: const Center(
           child: CircularProgressIndicator(),
         ),
@@ -149,10 +151,10 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                 height: 40,
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? const Color.fromARGB(255, 119, 64, 196)
+                      ? const Color.fromARGB(255, 135, 69, 226)
                       : isCompleted
                           ? const Color.fromARGB(255, 48, 96, 50)
-                          : const Color.fromARGB(255, 26, 34, 57),
+                          : const Color.fromARGB(255, 43, 54, 59),
                   shape: BoxShape.circle,
                   boxShadow: isSelected
                       ? [
@@ -192,7 +194,7 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
             onPressed: onTap,
             style: ElevatedButton.styleFrom(
               backgroundColor: isSelected
-                  ?  const Color.fromARGB(255, 119, 64, 196)
+                  ? const Color.fromARGB(255, 135, 69, 226)
                   : isCompleted
                       ? const Color.fromARGB(255, 48, 96, 50)
                       : Colors.transparent,
@@ -226,87 +228,20 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
       } else if (i + 1 < selectedDay) {
         state = 'completed'; // Mark completed topics
       }
-      
+
+      // Generate a unique route for each topic (based on index)
+      String route = '/${topics[i].toLowerCase().replaceAll(' ', '_')}';
+
       nodes.add({
         'label': topics[i], 
-       'route': '/${topic.toLowerCase().replaceAll(' ', '_')}', // Dynamically generate the route
+        'route': route,  // Use the dynamically generated route
         'state': state,
         'icon': 'assets/${topics[i].toLowerCase()}.png',  // Dynamically set icon path
         'progress': '5/5'  // Adjust progress dynamically if needed
       });
     }
-    
+
     snackbarController.showModal('Choose Exercise', nodes); // Show the modal with updated nodes
   }
 }
 
-// class FlowPathPainter extends CustomPainter {
-//   final int selectedDay;
-//   final List<Offset> nodePositions;
-
-//   FlowPathPainter({required this.selectedDay, required this.nodePositions});
-
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     Paint pathPaint = Paint()
-//       ..color = const Color.fromARGB(255, 31, 31, 31)
-//       ..strokeWidth = 8 // Reduced thickness of the path
-//       ..style = PaintingStyle.stroke;
-
-//     Paint glowPathPaint = Paint()
-//       ..color = const Color.fromARGB(255, 48, 96, 50)
-//       ..strokeWidth = 10 // Glow thickness adjusted
-//       ..style = PaintingStyle.stroke
-//       ..maskFilter = MaskFilter.blur(BlurStyle.inner, 10);
-
-//     Path path = Path();
-
-//     for (int i = 0; i < nodePositions.length - 1; i++) {
-//       Offset start = nodePositions[i];
-//       Offset end = nodePositions[i + 1];
-//       Offset control1 = Offset((start.dx + end.dx) / 2, start.dy + 30);
-//       Offset control2 = Offset((start.dx + end.dx) / 2, end.dy - 30);
-
-//       path.moveTo(start.dx, start.dy);
-//       path.cubicTo(
-//         control1.dx,
-//         control1.dy,
-//         control2.dx,
-//         control2.dy,
-//         end.dx,
-//         end.dy,
-//       );
-//     }
-
-//     canvas.drawPath(path, pathPaint);
-
-//     // Glow effect for completed days
-//     if (selectedDay > 1) {
-//       Path glowPath = Path();
-//       for (int i = 0; i < nodePositions.length - 1; i++) {
-//         if (i + 1 < selectedDay) {
-//           Offset start = nodePositions[i];
-//           Offset end = nodePositions[i + 1];
-//           Offset control1 = Offset((start.dx + end.dx) / 2, start.dy + 30);
-//           Offset control2 = Offset((start.dx + end.dx) / 2, end.dy - 30);
-
-//           glowPath.moveTo(start.dx, start.dy);
-//           glowPath.cubicTo(
-//             control1.dx,
-//             control1.dy,
-//             control2.dx,
-//             control2.dy,
-//             end.dx,
-//             end.dy,
-//           );
-//         }
-//       }
-//       canvas.drawPath(glowPath, glowPathPaint);
-//     }
-//   }
-
-//   @override
-//   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-//     return false;
-//   }
-// }

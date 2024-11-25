@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,7 +29,7 @@ class SnackbarController extends GetxController {
             children: [
               Center(
                 child: Text(
-                  message,  // Use the dynamic message passed to the modal
+                  message, // Use the dynamic message passed to the modal
                   style: GoogleFonts.quicksand(
                     color: Colors.white,
                     fontSize: 25,
@@ -55,10 +56,7 @@ class SnackbarController extends GetxController {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          elevation:  0, // Elevation for selected state
-                          shadowColor: node['state'] == 'selected'
-                              ? Color.fromARGB(255, 168, 106, 255)
-                              : Colors.transparent, // Glowing effect for selected state
+                          elevation: 0, // Elevation for selected state
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +65,8 @@ class SnackbarController extends GetxController {
                               children: [
                                 const SizedBox(width: 10),
                                 CircleAvatar(
-                                  backgroundImage: AssetImage(node['icon'] ?? ''), // Ensure image is loaded properly
+                                  backgroundImage:
+                                      AssetImage(node['icon'] ?? ''), // Ensure image is loaded properly
                                   radius: 18, // Profile picture or icon
                                 ),
                                 const SizedBox(width: 10),
@@ -107,9 +106,9 @@ class SnackbarController extends GetxController {
   // Get button color based on state
   Color _getButtonColor(Map<String, String> node) {
     if (node['state'] == 'completed') {
-      return const Color.fromARGB(0, 0, 0, 0);
+      return Colors.green;
     } else if (node['state'] == 'selected') {
-      return Color.fromARGB(0, 0, 0, 0); // Highlight selected node
+      return const Color.fromARGB(255, 135, 69, 226); // Highlight selected node
     }
     return Colors.transparent; // Default button color
   }
@@ -117,9 +116,9 @@ class SnackbarController extends GetxController {
   // Get border color based on state
   Color _getBorderColor(Map<String, String> node) {
     if (node['state'] == 'completed') {
-      return const Color.fromARGB(255, 69, 136, 71);
+      return Colors.green;
     } else if (node['state'] == 'selected') {
-      return Color.fromARGB(255, 168, 106, 255); // Glow effect for selected state
+      return const Color.fromARGB(255, 168, 106, 255); // Glow effect for selected state
     }
     return Colors.transparent;
   }

@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       GetPage(name: '/adverbs', page: () => GrammarPracticeScreen()),
       GetPage(name: '/conjunctions', page: () => ConjunctionsScreen()),
       GetPage(name: '/prefix_and_suffix', page: () => PrefixSuffixScreen()),
-      GetPage(name: '/sentence formation', page: () => SentenceStructureQuizScreen()),
+      GetPage(name: '/sentence_formation', page: () => SentenceStructureQuizScreen()),
       GetPage(name: '/verbs', page: () => VerbsQuizScreen()),
     ],
     );

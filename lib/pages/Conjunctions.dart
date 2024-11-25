@@ -60,7 +60,7 @@ class _ConjunctionsScreenState extends State<ConjunctionsScreen> {
               'Wrong! The correct answer is: ${questions[currentQuestionIndex]["options"][questions[currentQuestionIndex]["answerIndex"]]}',
               style: TextStyle(color: Colors.white),
             ),
-            backgroundColor: const Color.fromARGB(255, 231, 84, 74),
+            backgroundColor: const Color.fromARGB(255, 137, 57, 51),
             duration: const Duration(seconds: 2),
           ),
         );
@@ -110,12 +110,12 @@ class _ConjunctionsScreenState extends State<ConjunctionsScreen> {
             child: Icon(Icons.more_vert, color: Colors.white),
           )
         ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(4.0),
+         bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(12.0),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
+              borderRadius: BorderRadius.circular(50.0),
               child: LinearProgressIndicator(
                 value: correctAnswers / questions.length,
                 color: Colors.green,
@@ -169,7 +169,7 @@ class _ConjunctionsScreenState extends State<ConjunctionsScreen> {
                           ? (selectedOption ==
                                   currentQuestion["answerIndex"]
                               ? Colors.green
-                              : const Color.fromARGB(255, 239, 100, 91))
+                              : const Color.fromARGB(255, 137, 57, 51))
                           : const Color.fromARGB(255, 135, 69, 226))
                       : const Color.fromARGB(255, 135, 69, 226),
                   minimumSize: const Size(double.infinity, 50),

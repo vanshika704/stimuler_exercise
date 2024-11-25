@@ -107,9 +107,9 @@ class SnackbarController extends GetxController {
   // Get button color based on state
   Color _getButtonColor(Map<String, String> node) {
     if (node['state'] == 'completed') {
-      return Colors.green;
+      return const Color.fromARGB(0, 0, 0, 0);
     } else if (node['state'] == 'selected') {
-      return Color.fromARGB(255, 135, 69, 226); // Highlight selected node
+      return Color.fromARGB(0, 0, 0, 0); // Highlight selected node
     }
     return Colors.transparent; // Default button color
   }
@@ -117,7 +117,7 @@ class SnackbarController extends GetxController {
   // Get border color based on state
   Color _getBorderColor(Map<String, String> node) {
     if (node['state'] == 'completed') {
-      return Colors.green;
+      return const Color.fromARGB(255, 69, 136, 71);
     } else if (node['state'] == 'selected') {
       return Color.fromARGB(255, 168, 106, 255); // Glow effect for selected state
     }

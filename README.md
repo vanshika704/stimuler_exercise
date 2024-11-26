@@ -1,25 +1,28 @@
-Exercise App
+# Exercise App
+
 This Flutter-based exercise app is designed to help users learn grammar through interactive quizzes. Each day consists of a different exercise with progressively unlocked content. The app tracks progress, rewards the user with points for correct answers, and unlocks further exercises based on quiz performance.
 
-Features
+# Features
 Day-wise exercises: Users are given daily exercises that cover grammar topics like adjectives, adverbs, conjunctions, sentence formation, etc.
 Interactive quiz: Each exercise consists of multiple questions where users can choose answers. The app tracks correct answers and shows feedback.
 Progress tracking: Completed quizzes unlock the next day’s exercise.
 Dynamic user interface: Nodes representing topics change color based on completion status, with animations indicating progress.
 Custom modal for exercise selection: After completing a quiz, a custom modal appears to show the user's score and progress.
-Technologies Used
+# Technologies Used
 Flutter: The app is built using the Flutter framework.
 GetX: State management library for reactive UI and easy navigation.
 Google Fonts: To enhance the UI with custom fonts.
 Custom Painting: For visual flow of exercise paths with interactive nodes.
 Snackbars: For real-time feedback on quiz results.
-App Flow
+
+# App Flow
 Main Screen: Displays an interactive flow path of exercises (nodes), each representing a topic.
 Day-wise Exercise: Each node represents a day's topic, and users can interact with these to take quizzes.
 Quiz Screen: A series of multiple-choice questions where users answer questions related to the topic.
 Quiz Completion: Upon completing a quiz, users receive feedback and a score. The next day's exercise is unlocked.
 Unlocking Mechanism: When a quiz is completed, the next day becomes available for selection, and a green node signifies a completed day.
-Installation
+
+# Installation
 To get started with the Exercise App, clone this repository and run the following commands in your terminal:
 
 Clone the repository:

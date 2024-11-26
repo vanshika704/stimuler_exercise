@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,9 +45,9 @@ class SnackbarController extends GetxController {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: _isTileEnabled(node) ? () {
                           Get.toNamed(node['route']!); // Navigate to respective route
-                        },
+                        } : null, // Disable button if not selected
                         style: ElevatedButton.styleFrom(
                           backgroundColor: _getButtonColor(node),
                           side: BorderSide(color: _getBorderColor(node)),
@@ -56,7 +55,7 @@ class SnackbarController extends GetxController {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          elevation: 0, // Elevation for selected state
+                          elevation: _isTileEnabled(node) ? 4 : 0, // Elevation for selected state
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,7 +73,7 @@ class SnackbarController extends GetxController {
                                   node['label']!,
                                   style: GoogleFonts.quicksand(
                                     fontSize: 16,
-                                    color: Colors.white,
+                                    color: _isTileEnabled(node) ? Colors.white : Colors.grey, // Grey text for disabled tiles
                                   ),
                                 ),
                               ],
@@ -83,7 +82,7 @@ class SnackbarController extends GetxController {
                               node['progress'] ?? '',
                               style: GoogleFonts.quicksand(
                                 fontSize: 14,
-                                color: Colors.white70,
+                                color: _isTileEnabled(node) ? Colors.white70 : Colors.grey, // Grey text for disabled tiles
                               ),
                             ),
                           ],
@@ -103,6 +102,11 @@ class SnackbarController extends GetxController {
     );
   }
 
+  // Check if the tile should be enabled (only the selected tile is enabled)
+  bool _isTileEnabled(Map<String, String> node) {
+    return node['state'] == 'selected'; // Only allow the tile with 'selected' state to be interactive
+  }
+
   // Get button color based on state
   Color _getButtonColor(Map<String, String> node) {
     if (node['state'] == 'completed') {
@@ -110,7 +114,7 @@ class SnackbarController extends GetxController {
     } else if (node['state'] == 'selected') {
       return const Color.fromARGB(255, 135, 69, 226); // Highlight selected node
     }
-    return Colors.transparent; // Default button color
+    return Colors.grey; // Disabled button color
   }
 
   // Get border color based on state
@@ -120,6 +124,6 @@ class SnackbarController extends GetxController {
     } else if (node['state'] == 'selected') {
       return const Color.fromARGB(255, 168, 106, 255); // Glow effect for selected state
     }
-    return Colors.transparent;
+    return Colors.transparent; // No border for disabled button
   }
 }

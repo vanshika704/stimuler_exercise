@@ -29,7 +29,7 @@ Clone the repository:
 
 bash
 
-git clone https://github.com/yourusername/exerciseapp.git
+git clone https://github.com/vanshika704/stimuler_exercise
 cd exerciseapp
 Install dependencies:
 

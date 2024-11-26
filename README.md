@@ -1,7 +1,8 @@
 # Exercise App
 
 This Flutter-based exercise app is designed to help users learn grammar through interactive quizzes. Each day consists of a different exercise with progressively unlocked content. The app tracks progress, rewards the user with points for correct answers, and unlocks further exercises based on quiz performance.
-
+# working prototype 
+https://drive.google.com/file/d/1dYj29bZUAl9cLY_hae-2nupLTrL8qiXF/view?usp=sharing
 # Features
 Day-wise exercises: Users are given daily exercises that cover grammar topics like adjectives, adverbs, conjunctions, sentence formation, etc.
 Interactive quiz: Each exercise consists of multiple questions where users can choose answers. The app tracks correct answers and shows feedback.

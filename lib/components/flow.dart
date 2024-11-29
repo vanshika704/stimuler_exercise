@@ -1,4 +1,3 @@
-
 // import 'package:exerciseapp/components/flowpathpainter.dart';
 // import 'package:exerciseapp/controllers/quiz.dart';
 // import 'package:flutter/material.dart';
@@ -32,13 +31,11 @@
     
 //     // Listen for changes to unlockedDays from QuizController
 //     ever(Get.find<QuizController>().unlockedDays, (_) {
-//       // Check if the next day should be unlocked based on the quiz completion
-//       if (Get.find<QuizController>().unlockedDays.contains("Day 2") && selectedDay < 2) {
-//         setState(() {
-//           selectedDay = 2;
-//           isQuizCompleted = true; // Mark quiz as completed
-//         });
-//       }
+//       var unlockedDays = Get.find<QuizController>().unlockedDays;
+//       setState(() {
+//         selectedDay = unlockedDays.length -1;  // Update the selectedDay based on unlocked days
+//         isQuizCompleted = true; // Mark quiz as completed if the day is unlocked
+//       });
 //     });
 //   }
 
@@ -114,14 +111,23 @@
 //                 label: topics[i],
 //                 isSelected: selectedDay == (i + 1),
 //                 isCompleted: selectedDay > (i + 1) || (isQuizCompleted && i == selectedDay),
+            
 //                 onTap: () {
-//                   if (i + 1 == selectedDay || (isQuizCompleted && i == selectedDay)) {
-//                     setState(() {
-//                       selectedDay = i + 1;
-//                     });
-//                     _showCustomModal(topics[i]);
-//                   }
-//                 },
+//   // Unlock current and next nodes only if the conditions are met
+//   if (selectedDay == (i + 1) || (isQuizCompleted && i == selectedDay)) {
+//     setState(() {
+//       // Select the tapped node
+//       selectedDay = i + 1;  // Update selectedDay to the tapped node's day
+      
+//       // Unlock the next node by incrementing selectedDay, but don't automatically select it
+    
+//     });
+
+//     // Show the modal for the tapped topic
+//     _showCustomModal(topics[i]);
+//   }
+// },
+
 //               ),
 //             ),
 //         ],
@@ -227,7 +233,7 @@
 //       }
 
 //       String route = '/${topics[i].toLowerCase().replaceAll(' ', '_')}';
-// String progress = "${QuizController().correctAnswers.value}/5";
+//       String progress = "${QuizController().correctAnswers.value}/5";
 //       nodes.add({
 //         'label': topics[i],
 //         'route': route,
@@ -270,15 +276,15 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
   void initState() {
     super.initState();
     _generateNodePositions();
-    
+
     // Listen for changes to unlockedDays from QuizController
-   ever(Get.find<QuizController>().unlockedDays, (_) {
-  var unlockedDays = Get.find<QuizController>().unlockedDays;
-  setState(() {
-    selectedDay = unlockedDays.length+1;  // Update the selectedDay based on unlocked days
-    isQuizCompleted = true; // Mark quiz as completed if the day is unlocked
-  });
-});
+    ever(Get.find<QuizController>().unlockedDays, (_) {
+      var unlockedDays = Get.find<QuizController>().unlockedDays;
+      setState(() {
+        selectedDay = unlockedDays.length - 1; // Update the selectedDay based on unlocked days
+        isQuizCompleted = true; // Mark quiz as completed if the day is unlocked
+      });
+    });
   }
 
   void _generateNodePositions() {
@@ -354,10 +360,19 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                 isSelected: selectedDay == (i + 1),
                 isCompleted: selectedDay > (i + 1) || (isQuizCompleted && i == selectedDay),
                 onTap: () {
-                  if (i + 1 == selectedDay || (isQuizCompleted && i == selectedDay)) {
+                  // Unlock current and next nodes only if the conditions are met
+                  if (selectedDay == (i + 1) || (isQuizCompleted && i == selectedDay)) {
                     setState(() {
+                      // Select the tapped node
                       selectedDay = i + 1;
+
+                      // Update the quiz completion state and the next node state
+                      if (selectedDay < topics.length) {
+                        selectedDay++;
+                      }
                     });
+
+                    // Show the modal for the tapped topic
                     _showCustomModal(topics[i]);
                   }
                 },
@@ -459,9 +474,9 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
     for (int i = 0; i < topics.length; i++) {
       String state = 'default';
 
-      if (i + 1 == selectedDay) {
+      if (i+1  == selectedDay) {
         state = 'selected';
-      } else if (i + 1 < selectedDay) {
+      } else if (i +1 < selectedDay) {
         state = 'completed';
       }
 

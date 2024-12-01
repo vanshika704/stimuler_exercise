@@ -360,21 +360,13 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
                 isSelected: selectedDay == (i + 1),
                 isCompleted: selectedDay > (i + 1) || (isQuizCompleted && i == selectedDay),
                 onTap: () {
-                  // Unlock current and next nodes only if the conditions are met
-                  if (selectedDay == (i + 1) || (isQuizCompleted && i == selectedDay)) {
-                    setState(() {
-                      // Select the tapped node
-                      selectedDay = i + 1;
+                  // Update the state of nodes based on the tapped node
+                  setState(() {
+                    selectedDay = i + 1;
+                  });
 
-                      // Update the quiz completion state and the next node state
-                      if (selectedDay < topics.length) {
-                        selectedDay++;
-                      }
-                    });
-
-                    // Show the modal for the tapped topic
-                    _showCustomModal(topics[i]);
-                  }
+                  // Show the modal for the tapped topic
+                  _showCustomModal(topics[i]);
                 },
               ),
             ),
@@ -474,9 +466,9 @@ class _FlowPathScreenState extends State<FlowPathScreen> {
     for (int i = 0; i < topics.length; i++) {
       String state = 'default';
 
-      if (i+1  == selectedDay) {
+      if (i == selectedDay - 1) {
         state = 'selected';
-      } else if (i +1 < selectedDay) {
+      } else if (i < selectedDay - 1) {
         state = 'completed';
       }
 
